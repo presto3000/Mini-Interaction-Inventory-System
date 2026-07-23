@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "UI/PlayerOverlayWidget.h"
-#include "WBP_MainPlayerOverlayWidget.generated.h"
+#include "MainPlayerOverlayWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class INTERINVSYSTEM_API UWBP_MainPlayerOverlayWidget : public UPlayerOverlayWidget
+class INTERINVSYSTEM_API UMainPlayerOverlayWidget : public UPlayerOverlayWidget
 {
 	GENERATED_BODY()
 

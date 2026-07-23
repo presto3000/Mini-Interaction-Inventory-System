@@ -1,13 +1,13 @@
 ﻿// presto3000 Chris Pawlowski All Rights reserved.
 
 
-#include "WBP_MainPlayerOverlayWidget.h"
+#include "MainPlayerOverlayWidget.h"
 
 #include "InterInvSystemCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Persistence/InteractionPersistenceLibrary.h"
 
-void UWBP_MainPlayerOverlayWidget::OnSaveClicked()
+void UMainPlayerOverlayWidget::OnSaveClicked()
 {
 
 	if (AInterInvSystemCharacter* Player = Cast<AInterInvSystemCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0)))
@@ -16,7 +16,7 @@ void UWBP_MainPlayerOverlayWidget::OnSaveClicked()
 	}
 }
 
-void UWBP_MainPlayerOverlayWidget::OnLoadClicked()
+void UMainPlayerOverlayWidget::OnLoadClicked()
 {
 	if (AInterInvSystemCharacter* Player = Cast<AInterInvSystemCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0)))
 	{

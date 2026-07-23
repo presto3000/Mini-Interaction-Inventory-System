@@ -6,8 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "InterInvSystemPlayerController.generated.h"
 
+class UMainPlayerOverlayWidget;
 class UInventoryWidget;
-class UPlayerOverlayWidget;
 class UInputMappingContext;
 class UUserWidget;
 
@@ -52,13 +52,13 @@ protected:
 	void OnFocusChanged(AActor* Actor, FText Text);
 	
 	UPROPERTY()
-	UPlayerOverlayWidget* PlayerOverlayWidget;
+	UMainPlayerOverlayWidget* PlayerOverlayWidget;
 	
 	UPROPERTY()
 	UInventoryWidget* InventoryWidget;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UPlayerOverlayWidget> PlayerOverlayWidgetClass;
+	TSubclassOf<UMainPlayerOverlayWidget> PlayerOverlayWidgetClass;
 	
 	bool bInventoryOpen = false;
 };

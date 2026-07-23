@@ -11,7 +11,8 @@ enum class EItemType : uint8
 {
 	Consumable,
 	Equipment,
-	KeyItem
+	KeyItem,
+	Resource
 };
 
 /**

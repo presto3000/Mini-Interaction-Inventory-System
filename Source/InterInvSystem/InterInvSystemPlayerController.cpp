@@ -9,7 +9,7 @@
 #include "InterInvSystem.h"
 #include "Interaction/InteractionComponent.h"
 #include "UI/InventoryWidget.h"
-#include "UI/PlayerOverlayWidget.h"
+#include "UI/MainPlayerOverlayWidget.h"
 #include "Widgets/Input/SVirtualJoystick.h"
 
 void AInterInvSystemPlayerController::BeginPlay()
@@ -35,7 +35,7 @@ void AInterInvSystemPlayerController::BeginPlay()
 
 	if (PlayerOverlayWidgetClass)
 	{
-		PlayerOverlayWidget = CreateWidget<UPlayerOverlayWidget>(this,PlayerOverlayWidgetClass);
+		PlayerOverlayWidget = CreateWidget<UMainPlayerOverlayWidget>(this,PlayerOverlayWidgetClass);
 		if (PlayerOverlayWidget)
 		{
 			PlayerOverlayWidget->AddToViewport();
