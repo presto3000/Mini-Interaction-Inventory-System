@@ -1,48 +1,99 @@
 # Mini-Interaction-Inventory-System
 
-Mini Interaction Inventory System U.E 5.6
+A reusable, data-driven interaction, inventory, and persistence framework for Unreal Engine 5.6, built as a plugin.
 
-A reusable, data-driven interaction and inventory framework for Unreal Engine 5, built as a plugin.
+---
 
-## Highlights
+## Features
 
-Generic interaction - any Pawn or Character can detect and interact with any actor in front of it through a single `IInteractable` interface. Works identically for pickups, containers, switches, doors, or NPCs.
-Decoupled inventory - a standalone `UInventoryComponent`, not baked into any character class, communicating entirely through delegates.
-Data/runtime separation - item definitions (`UItemDefinition`) are plain data assets; runtime state (`FInventoryEntry`) is just an ID and a quantity.
-Instanced strategy objects for item behavior - "what happens when I use this potion" is a small, inline-editable `UItemUseEffect` object picked from a dropdown directly on the item asset. No Blueprint subclassing required per item.
-Async-friendly by design - icons and pickup meshes are soft references, streamed in on demand instead of loading eagerly.
-Full save/load support - any interactable actor can opt into persistence with a couple of `UPROPERTY(SaveGame)` tags and a stable GUID; no per-class serialization code required.
-Automation-tested - stacking, removal, and capacity-limit behavior are covered by engine automation tests, runnable headlessly.
+- **Generic interaction** – Any `Pawn` or `Character` can interact with actors through a single `IInteractable` interface. The same interaction flow works for pickups, containers, switches, doors, NPCs, and any custom interactable actor.
 
-Persistence sits orthogonally to all of this: anything deriving from `ASaveableActorBase` gets generic capture/restore for free, through reflection over its own `SaveGame`-tagged properties — the save system never hardcodes a specific actor class.
+- **Decoupled inventory** – Inventory functionality is provided by a standalone `UInventoryComponent` and communicates through delegates rather than being tied to a specific character implementation.
 
-## Getting started
+- **Data-driven items** – Static item data lives in `UItemDefinition` data assets, while runtime inventory state is represented by lightweight `FInventoryEntry` structures.
 
-Drop this plugin's folder into your project's `Plugins/` directory and enable it from the Plugins browser (or add it to your `.uproject`'s plugin list directly).
-Project Settings -> Game -> Asset Manager, add a Primary Asset Type:
-Type: `Item`
-Base Class: `ItemDefinition`
-Directory: wherever you'll keep your item assets (e.g. `/Game/Items`)
-Create a few `ItemDefinition` Data Assets. Set their stack rules, and - if you want the item to do something when used - pick a `UseEffect` from the inline dropdown (`Heal`, `Print Debug Message`, or your own subclass) and fill in its fields. No new class needed.
-Add `UInventoryComponent` and `UInteractionComponent` to your player Pawn (Blueprint "Add Component" or C++ `CreateDefaultSubobject`).
-Bind an input action to `UInteractionComponent::TryInteract`, and bind `OnFocusChanged` in your HUD to show interaction prompts.
-Place `AItemPickupActor`, `AInteractiveContainerActor`, `AInteractiveSwitchActor`, or `ADoorActor` instances on your level.
+- **Pluggable item behavior** – Item usage is implemented with inline-editable `UItemUseEffect` strategy objects. Different behaviors can be assigned directly from the item asset without creating Blueprint subclasses for every item.
+
+- **Async-ready assets** – Item icons and pickup meshes use soft object references and are streamed only when required.
+
+- **Generic save/load system** – Any actor derived from `ASaveableActorBase` automatically supports persistence. Only properties marked with `UPROPERTY(SaveGame)` are serialized, eliminating per-class save code.
+
+- **Automation tested** – Inventory stacking, removal, and capacity behavior are covered by Unreal's Automation Framework and can be executed headlessly.
+
+---
+
+## Persistence
+
+Persistence is completely independent of the interaction and inventory systems.
+
+Actors deriving from `ASaveableActorBase` automatically capture and restore all properties marked with `UPROPERTY(SaveGame)` using Unreal's reflection system. No custom serialization code is required for each actor type.
+
+---
+
+## Getting Started
+
+1. Copy the plugin into your project's `Plugins/` directory.
+2. Enable the plugin from the Unreal Plugin Browser (or add it to your `.uproject`).
+3. In **Project Settings → Asset Manager**, register a Primary Asset Type:
+   - **Type:** `Item`
+   - **Base Class:** `ItemDefinition`
+   - **Directory:** e.g. `/Game/Items`
+4. Create one or more `ItemDefinition` assets.
+5. Add `UInventoryComponent` and `UInteractionComponent` to your player.
+6. Bind your interaction input to `UInteractionComponent::TryInteract()`.
+7. Bind `OnFocusChanged` to your UI to display interaction prompts.
+8. Place actors such as:
+   - `AItemPickupActor`
+   - `AInteractiveContainerActor`
+   - `AInteractiveSwitchActor`
+   - `ADoorActor`
+
+---
 
 ## Debugging
 
-`Inventory.Dump` - prints the local player's current inventory contents to the log.
+Use the following console command:
+
+```text
+Inventory.Dump
+```
+
+Prints the current player's inventory contents to the Output Log.
+
+---
 
 ## Testing
-Automation tests live alongside the source and run through the standard Unreal automation framework (`Game.Inventory.*` test group) 
-Design notes
-A few deliberate choices worth calling out for anyone extending this:
 
-Soft references stay soft until actually needed. Icons and pickup meshes only resolve when something explicitly asks for them (`RequestLoadIcon`, or on `BeginPlay` for a dropped pickup's mesh).
-Save state and config data never mix. `FInventoryEntry` and `ASaveableActorBase`'s captured bytes describe what changed; `UItemDefinition` and level-placed actor defaults describe what's possible. If you find yourself serializing something that's actually just static config, it belongs on the data asset instead.
+Automation tests are included and can be executed through Unreal's Automation Framework.
+
+Test group:
+
+```text
+Game.Inventory.*
+```
+
+---
+
+## Design Notes
+
+### Data vs Runtime State
+
+- `UItemDefinition` stores static configuration.
+- `FInventoryEntry` stores runtime inventory state.
+- `ASaveableActorBase` stores runtime world state.
+
+Configuration should remain in data assets, while only mutable runtime state should be serialized.
+
+### Asset Loading
+
+Icons and pickup meshes remain as soft references until explicitly requested. Assets are loaded asynchronously when needed instead of eagerly during startup.
+
+---
 
 ## Known Limitations
 
 - Only actors derived from `ASaveableActorBase` are automatically saved.
 - Only properties marked with `UPROPERTY(SaveGame)` are serialized.
-- Dynamically spawned actors are not recreated after loading.
-- Destroyed actors must have a persistent `SaveId` to be correctly identified across sessions.
+- Runtime-spawned actors are not recreated automatically during loading.
+- Destroyed actors require a unique, persistent `SaveId` to remain removed across sessions.
+- Multiplayer replication and multiplayer save/load are not currently supported.
