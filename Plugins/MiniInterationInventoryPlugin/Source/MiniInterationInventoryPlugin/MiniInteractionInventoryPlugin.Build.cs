@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MiniInterationInventoryPlugin : ModuleRules
+public class MiniInteractionInventoryPlugin : ModuleRules
 {
-	public MiniInterationInventoryPlugin(ReadOnlyTargetRules Target) : base(Target)
+	public MiniInteractionInventoryPlugin(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -25,7 +25,10 @@ public class MiniInterationInventoryPlugin : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", "Engine",
+				"Core", 
+				"Engine",
+				"UMG",
+				"Slate"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

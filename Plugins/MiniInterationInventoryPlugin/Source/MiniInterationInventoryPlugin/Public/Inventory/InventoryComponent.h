@@ -40,7 +40,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemUsed, FPrimaryAssetI
 
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class MINIINTERATIONINVENTORYPLUGIN_API UInventoryComponent : public UActorComponent
+class MINIINTERACTIONINVENTORYPLUGIN_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

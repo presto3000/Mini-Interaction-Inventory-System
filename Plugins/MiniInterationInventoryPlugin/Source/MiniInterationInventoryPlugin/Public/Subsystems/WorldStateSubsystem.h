@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MiniInterationInventoryPlugin/Public/Persistence/InventorySaveGame.h"
+#include "Persistence/InventorySaveGame.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "WorldStateSubsystem.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API UWorldStateSubsystem : public UGameInstanceSubsystem
+class MINIINTERACTIONINVENTORYPLUGIN_API UWorldStateSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 

@@ -2,8 +2,8 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "MiniInterationInventoryPlugin",
-	"Description": "Mini Interation Inventory Plugin",
+	"FriendlyName": "MiniInteractionInventoryPlugin",
+	"Description": "Mini Interaction Inventory Plugin",
 	"Category": "Other",
 	"CreatedBy": "presto3000 Chris Pawlowski",
 	"CreatedByURL": "",
@@ -16,7 +16,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "MiniInterationInventoryPlugin",
+			"Name": "MiniInteractionInventoryPlugin",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}

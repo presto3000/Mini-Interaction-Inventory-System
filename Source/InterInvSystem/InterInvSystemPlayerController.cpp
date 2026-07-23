@@ -7,6 +7,9 @@
 #include "InputMappingContext.h"
 #include "Blueprint/UserWidget.h"
 #include "InterInvSystem.h"
+#include "Interaction/InteractionComponent.h"
+#include "UI/InventoryWidget.h"
+#include "UI/PlayerOverlayWidget.h"
 #include "Widgets/Input/SVirtualJoystick.h"
 
 void AInterInvSystemPlayerController::BeginPlay()
@@ -27,10 +30,29 @@ void AInterInvSystemPlayerController::BeginPlay()
 		} else {
 
 			UE_LOG(LogInterInvSystem, Error, TEXT("Could not spawn mobile controls widget."));
-
 		}
-
 	}
+
+	if (PlayerOverlayWidgetClass)
+	{
+		PlayerOverlayWidget = CreateWidget<UPlayerOverlayWidget>(this,PlayerOverlayWidgetClass);
+		if (PlayerOverlayWidget)
+		{
+			PlayerOverlayWidget->AddToViewport();
+			InventoryWidget = PlayerOverlayWidget->InventoryWidget;
+		}
+	}
+
+
+	if (APawn* Pawn_ = GetPawn())
+	{
+		if (UInteractionComponent* Interaction =
+			Pawn_->FindComponentByClass<UInteractionComponent>())
+		{
+			Interaction->OnFocusChanged.AddDynamic(this, &AInterInvSystemPlayerController::OnFocusChanged);
+		}
+	}
+	
 }
 
 void AInterInvSystemPlayerController::SetupInputComponent()
@@ -57,5 +79,53 @@ void AInterInvSystemPlayerController::SetupInputComponent()
 				}
 			}
 		}
+	}
+}
+
+void AInterInvSystemPlayerController::OnFocusChanged(AActor* Actor, FText Text)
+{
+	if (!PlayerOverlayWidget)
+	{
+		return;
+	}
+	
+	if (Actor)
+	{
+		PlayerOverlayWidget->SetInteractionText(Text);
+	}
+	else
+	{
+		PlayerOverlayWidget->HideInteractionPrompt();
+	}
+}
+
+void AInterInvSystemPlayerController::ToggleInventory()
+{
+	if(!InventoryWidget)
+		return;
+
+	bInventoryOpen = !bInventoryOpen;
+
+	if(bInventoryOpen)
+	{
+		InventoryWidget->SetVisibility(ESlateVisibility::Visible);
+
+		FInputModeGameAndUI InputMode;
+		InputMode.SetWidgetToFocus(InventoryWidget->TakeWidget());
+		InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+
+		SetInputMode(InputMode);
+
+		bShowMouseCursor = true;
+
+		InventoryWidget->RefreshInventory();
+	}
+	else
+	{
+		InventoryWidget->SetVisibility(ESlateVisibility::Hidden);
+
+		SetInputMode(FInputModeGameOnly());
+
+		bShowMouseCursor = false;
 	}
 }

@@ -18,7 +18,8 @@ public class InterInvSystem : ModuleRules
 			"StateTreeModule",
 			"GameplayStateTreeModule",
 			"UMG",
-			"Slate"
+			"Slate",
+			"MiniInteractionInventoryPlugin"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

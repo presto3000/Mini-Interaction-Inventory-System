@@ -7,6 +7,8 @@
 #include "Logging/LogMacros.h"
 #include "InterInvSystemCharacter.generated.h"
 
+class UInteractionComponent;
+class UInventoryComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputAction;
@@ -31,6 +33,7 @@ class AInterInvSystemCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
 	
+	
 protected:
 
 	/** Jump Input Action */
@@ -44,6 +47,14 @@ protected:
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* LookAction;
+
+	/** Interact Input Action */
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* InteractAction;
+
+	/** Toggle Inventory Input Action */
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	UInputAction* ToggleInventoryAction;
 
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
@@ -66,6 +77,9 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	
+	void Interact(const FInputActionValue& Value);
+	void ToggleInventory();
 
 public:
 
@@ -92,5 +106,10 @@ public:
 
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	// ---------------------------------------- INTERACTION INVENTORY ----------------------------------------------- //
+	UPROPERTY(VisibleAnywhere) UInventoryComponent* InventoryComponent;
+	UPROPERTY(VisibleAnywhere) UInteractionComponent* InteractionComponent;
+	// ---------------------------------------- END INTERACTION INVENTORY ------------------------------------------- //
 };
 

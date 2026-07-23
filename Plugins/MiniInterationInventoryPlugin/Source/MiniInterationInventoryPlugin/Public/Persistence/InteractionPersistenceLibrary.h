@@ -11,7 +11,7 @@ class UInventoryComponent;
  * 
  */
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API UInteractionPersistenceLibrary : public UBlueprintFunctionLibrary
+class MINIINTERACTIONINVENTORYPLUGIN_API UInteractionPersistenceLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 public:

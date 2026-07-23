@@ -4,7 +4,7 @@
 
 #include "Modules/ModuleManager.h"
 
-class FMiniInterationInventoryPluginModule : public IModuleInterface
+class FMiniInteractionInventoryPluginModule : public IModuleInterface
 {
 public:
 

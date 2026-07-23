@@ -12,7 +12,7 @@
 // generically via reflection.
 
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API ASaveableActorBase : public AActor
+class MINIINTERACTIONINVENTORYPLUGIN_API ASaveableActorBase : public AActor
 {
 	GENERATED_BODY()
 

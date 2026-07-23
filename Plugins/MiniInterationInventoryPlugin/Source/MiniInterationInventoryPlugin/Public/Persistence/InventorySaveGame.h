@@ -34,7 +34,7 @@ public:
  * 
  */
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API UInventorySaveGame : public USaveGame
+class MINIINTERACTIONINVENTORYPLUGIN_API UInventorySaveGame : public USaveGame
 {
 	GENERATED_BODY()
 public:

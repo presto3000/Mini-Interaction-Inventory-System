@@ -16,7 +16,7 @@ class UInteractable : public UInterface
 /**
  * 
  */
-class MINIINTERATIONINVENTORYPLUGIN_API IInteractable
+class MINIINTERACTIONINVENTORYPLUGIN_API IInteractable
 {
 	GENERATED_BODY()
 

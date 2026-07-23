@@ -10,7 +10,7 @@
  * 
  */
 UCLASS(Blueprintable, EditInlineNew)
-class MINIINTERATIONINVENTORYPLUGIN_API UItemUseEffect : public UObject
+class MINIINTERACTIONINVENTORYPLUGIN_API UItemUseEffect : public UObject
 {
 	GENERATED_BODY()
 public:

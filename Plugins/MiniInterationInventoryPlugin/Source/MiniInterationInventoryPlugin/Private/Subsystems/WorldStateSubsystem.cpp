@@ -2,7 +2,7 @@
 
 
 #include "Subsystems/WorldStateSubsystem.h"
-#include "MiniInterationInventoryPlugin/Public/Persistence/InventorySaveGame.h"
+#include "Persistence/InventorySaveGame.h"
 
 void UWorldStateSubsystem::MarkActorDestroyed(FGuid ActorId)
 {

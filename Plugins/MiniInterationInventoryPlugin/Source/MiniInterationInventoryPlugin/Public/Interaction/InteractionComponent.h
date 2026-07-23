@@ -9,7 +9,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInteractionFocusChanged, AActor*, FocusedActor, FText, InteractionText);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class MINIINTERATIONINVENTORYPLUGIN_API UInteractionComponent : public UActorComponent
+class MINIINTERACTIONINVENTORYPLUGIN_API UInteractionComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

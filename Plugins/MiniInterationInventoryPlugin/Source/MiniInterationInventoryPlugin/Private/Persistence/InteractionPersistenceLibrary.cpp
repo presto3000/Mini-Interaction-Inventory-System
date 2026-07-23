@@ -1,10 +1,10 @@
 ﻿// presto3000 Chris Pawlowski All Rights reserved.
 
 
-#include "MiniInterationInventoryPlugin/Public/Persistence/InteractionPersistenceLibrary.h"
-#include "MiniInterationInventoryPlugin/Public/Persistence/InventorySaveGame.h"
+#include "Persistence/InteractionPersistenceLibrary.h"
+#include "Persistence/InventorySaveGame.h"
 #include "Inventory/InventoryComponent.h"
-#include "MiniInterationInventoryPlugin/Public/Persistence/SaveableActorBase.h"
+#include "Persistence/SaveableActorBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"

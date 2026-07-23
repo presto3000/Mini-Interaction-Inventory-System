@@ -11,6 +11,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "InterInvSystem.h"
+#include "InterInvSystemPlayerController.h"
+#include "Interaction/InteractionComponent.h"
 
 AInterInvSystemCharacter::AInterInvSystemCharacter()
 {
@@ -65,6 +67,9 @@ void AInterInvSystemCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AInterInvSystemCharacter::Look);
+
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &AInterInvSystemCharacter::Interact);
+		EnhancedInputComponent->BindAction(ToggleInventoryAction, ETriggerEvent::Started,this, &AInterInvSystemCharacter::ToggleInventory);
 	}
 	else
 	{
@@ -130,4 +135,24 @@ void AInterInvSystemCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+
+void AInterInvSystemCharacter::Interact(const FInputActionValue& Value)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Interact pressed"));
+
+	if (InteractionComponent)
+	{
+		InteractionComponent->TryInteract();
+	}
+}
+
+void AInterInvSystemCharacter::ToggleInventory()
+{
+	if (GetController() != nullptr)
+	{
+		AInterInvSystemPlayerController* PC =	Cast<AInterInvSystemPlayerController>(GetController());
+		PC->ToggleInventory();
+	}
 }

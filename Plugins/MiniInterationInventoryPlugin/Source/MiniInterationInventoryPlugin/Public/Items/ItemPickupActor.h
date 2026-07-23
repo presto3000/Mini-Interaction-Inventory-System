@@ -8,7 +8,7 @@
 #include "ItemPickupActor.generated.h"
 
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API AItemPickupActor : public ASaveableActorBase, public IInteractable
+class MINIINTERACTIONINVENTORYPLUGIN_API AItemPickupActor : public ASaveableActorBase, public IInteractable
 {
 	GENERATED_BODY()
 

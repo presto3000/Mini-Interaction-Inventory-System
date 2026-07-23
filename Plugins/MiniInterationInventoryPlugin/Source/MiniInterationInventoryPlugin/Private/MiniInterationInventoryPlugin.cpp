@@ -1,15 +1,15 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "MiniInterationInventoryPlugin.h"
+#include "MiniInteractionInventoryPlugin.h"
 
-#define LOCTEXT_NAMESPACE "FMiniInterationInventoryPluginModule"
+#define LOCTEXT_NAMESPACE "FMiniInteractionInventoryPluginModule"
 
-void FMiniInterationInventoryPluginModule::StartupModule()
+void FMiniInteractionInventoryPluginModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 }
 
-void FMiniInterationInventoryPluginModule::ShutdownModule()
+void FMiniInteractionInventoryPluginModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
@@ -17,4 +17,4 @@ void FMiniInterationInventoryPluginModule::ShutdownModule()
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FMiniInterationInventoryPluginModule, MiniInterationInventoryPlugin)
+IMPLEMENT_MODULE(FMiniInteractionInventoryPluginModule, MiniInteractionInventoryPlugin)

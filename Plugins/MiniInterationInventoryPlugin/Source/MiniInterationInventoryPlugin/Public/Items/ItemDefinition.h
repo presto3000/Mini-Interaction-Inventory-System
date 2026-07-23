@@ -18,7 +18,7 @@ enum class EItemType : uint8
  * 
  */
 UCLASS()
-class MINIINTERATIONINVENTORYPLUGIN_API UItemDefinition : public UPrimaryDataAsset
+class MINIINTERACTIONINVENTORYPLUGIN_API UItemDefinition : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 public:

@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "InterInvSystemPlayerController.generated.h"
 
+class UInventoryWidget;
+class UPlayerOverlayWidget;
 class UInputMappingContext;
 class UUserWidget;
 
@@ -17,6 +19,11 @@ UCLASS(abstract)
 class AInterInvSystemPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+
+	void ToggleInventory();
+	
 	
 protected:
 
@@ -40,5 +47,18 @@ protected:
 
 	/** Input mapping context setup */
 	virtual void SetupInputComponent() override;
-
+	
+	UFUNCTION()
+	void OnFocusChanged(AActor* Actor, FText Text);
+	
+	UPROPERTY()
+	UPlayerOverlayWidget* PlayerOverlayWidget;
+	
+	UPROPERTY()
+	UInventoryWidget* InventoryWidget;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UPlayerOverlayWidget> PlayerOverlayWidgetClass;
+	
+	bool bInventoryOpen = false;
 };

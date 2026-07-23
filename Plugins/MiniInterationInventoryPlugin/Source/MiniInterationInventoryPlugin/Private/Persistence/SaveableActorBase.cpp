@@ -1,7 +1,7 @@
 ﻿// presto3000 Chris Pawlowski All Rights reserved.
 
 
-#include "MiniInterationInventoryPlugin/Public/Persistence/SaveableActorBase.h"
+#include "Persistence/SaveableActorBase.h"
 #include "Serialization/ObjectAndNameAsStringProxyArchive.h"
 #include "Serialization/MemoryWriter.h"
 #include "Serialization/MemoryReader.h"
