@@ -30,6 +30,16 @@ public:
 protected:
 	
 	virtual void NativeConstruct() override;
+
+	UFUNCTION()
+	void Clicked();
+	
+	void RefreshVisuals();
+	void LoadIcon();
+	void UpdateSelectionVisual();
+
+	UFUNCTION(BlueprintImplementableEvent, Category="Inventory")
+	void BP_OnSelectionChanged(bool bIsSelected);
 	
 	UPROPERTY(meta=(BindWidget))
 	UButton* ItemButton;
@@ -39,6 +49,9 @@ protected:
 	
 	UPROPERTY(meta=(BindWidget))
 	UImage* ItemIcon;
+
+	UPROPERTY(BlueprintReadOnly, Category="Inventory")
+	bool bSelected = false;
 	
 	UPROPERTY()
 	UInventoryWidget* InventoryParent;
@@ -47,21 +60,5 @@ protected:
 	UInventoryComponent* InventoryComponent;
 	
 	FPrimaryAssetId ItemID;
-	
 	int32 Quantity = 0;
-
-	UFUNCTION()
-	void Clicked();
-	
-	void RefreshVisuals();
-	void LoadIcon();
-	
-	UPROPERTY(BlueprintReadOnly, Category="Inventory")
-	bool bSelected = false;
-
-	void UpdateSelectionVisual();
-
-	UFUNCTION(BlueprintImplementableEvent, Category="Inventory")
-	void BP_OnSelectionChanged(bool bIsSelected);
-
 };

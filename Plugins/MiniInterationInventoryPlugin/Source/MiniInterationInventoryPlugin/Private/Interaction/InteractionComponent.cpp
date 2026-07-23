@@ -152,3 +152,51 @@ void UInteractionComponent::TryInteract()
         OnFocusChanged.Broadcast(nullptr, FText::GetEmpty());
     }
 }
+
+// --- Debug tool -------------------------------------------------------
+// Console command: "Interaction.Dump" prints current interaction state.
+static FAutoConsoleCommandWithWorld GDumpInteractionCommand(
+    TEXT("Interaction.Dump"),
+    TEXT("Prints the local player's interaction component state."),
+    FConsoleCommandWithWorldDelegate::CreateStatic(
+        [](UWorld* World)
+        {
+            if (!World)
+            {
+                return;
+            }
+            APlayerController* PC = World->GetFirstPlayerController();
+            APawn* Pawn = PC ? PC->GetPawn() : nullptr;
+
+            UInteractionComponent* Interaction = Pawn ? Pawn->FindComponentByClass<UInteractionComponent>() : nullptr;
+
+            if (!Interaction)
+            {
+                UE_LOG(LogTemp, Warning,
+                    TEXT("Interaction.Dump: no UInteractionComponent found on player's pawn."));
+                return;
+            }
+
+            UE_LOG(LogTemp, Log, TEXT("=== Interaction Dump ==="));
+
+            if (AActor* Focused = Interaction->GetFocusedActor())
+            {
+                UE_LOG(LogTemp, Log, TEXT("Focused Actor: %s"), *Focused->GetName());
+                
+                if (Focused->Implements<UInteractable>())
+                {
+                    FText Text = IInteractable::Execute_GetInteractionText(Focused, Pawn);
+
+                    UE_LOG(LogTemp, Log, TEXT("Interaction Text: %s"), *Text.ToString());
+                }
+            }
+            else
+            {
+                UE_LOG(LogTemp, Log, TEXT("Focused Actor: None"));
+            }
+
+            UE_LOG(LogTemp, Log, TEXT("Interaction Radius: %.1f"), Interaction->InteractionRadius);
+            UE_LOG(LogTemp, Log, TEXT("Scan Interval: %.2f"), Interaction->ScanInterval);
+        }
+    )
+);

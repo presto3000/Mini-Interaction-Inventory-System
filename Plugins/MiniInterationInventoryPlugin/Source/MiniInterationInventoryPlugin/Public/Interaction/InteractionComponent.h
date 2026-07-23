@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	float ScanInterval = 0.1f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	float InteractionRadius = 300.f;
+
 	UPROPERTY(BlueprintAssignable, Category = "Interaction")
 	FOnInteractionFocusChanged OnFocusChanged;
 
@@ -45,5 +48,5 @@ private:
 	UPROPERTY()
 	TWeakObjectPtr<AActor> FocusedActor;
 
-	float InteractionRadius = 300.f;
+
 };

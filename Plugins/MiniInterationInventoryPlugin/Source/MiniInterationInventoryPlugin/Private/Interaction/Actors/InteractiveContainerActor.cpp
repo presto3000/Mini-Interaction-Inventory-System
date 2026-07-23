@@ -26,14 +26,12 @@ FText AInteractiveContainerActor::GetInteractionText_Implementation(AActor* InIn
 
 void AInteractiveContainerActor::Interact_Implementation(AActor* InInstigator)
 {
-	//SetToggleState(!bIsOpen);
 	IToggleTarget::Execute_SetToggleState(this, !bIsOpen);
 }
 
 void AInteractiveContainerActor::SetToggleState_Implementation(bool bNewState)
 {
 	bIsOpen = bNewState;
-	
 }
 
 void AInteractiveContainerActor::RestoreSaveState(const TArray<uint8>& Bytes)
